@@ -1,10 +1,11 @@
-# Lunchbox Labs standards
+# Lunchbox Labs .github
 
-Shared conventions for contributors and coding agents:
+Organization-wide configuration and shared resources for Lunchbox Labs.
 
-- [Agent guidance](standards/agent-guidance.md): read for every repository.
-- [Workflows](standards/workflows.md): read when working on GitHub Actions.
-- [npm packages](standards/npm-packages.md): read for npm package repositories.
-- [iOS apps](standards/ios-apps.md): read for native iOS app repositories.
+- [Organization profile](profile/README.md): the public organization overview.
+- [Common agent guidance](agent-guidance/common.md): conventions for every repository.
+- [Workflow guidance](agent-guidance/workflows.md): GitHub Actions naming conventions.
+- [npm package guidance](agent-guidance/npm-packages.md): conventions for npm package repositories.
+- [iOS app guidance](agent-guidance/ios-apps.md): conventions for native iOS app repositories.
 
-Each repository's `AGENTS.md` should link to the applicable files and document its local commands and exceptions. Shared standards describe conventions; repository configuration remains the source of truth for available tooling.
+Each repository's `AGENTS.md` should link to the applicable guidance and document local commands and exceptions. Repository configuration remains the source of truth for available tooling.
