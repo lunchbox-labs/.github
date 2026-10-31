@@ -28,6 +28,6 @@ A pull request waits for its slowest job, so read job and step durations from re
 
 ## Diagnosing failed checks
 
-- Bound the main operation below the job timeout, reserving separate, bounded time for diagnostics and artifact upload. Capture actionable process state and installer or runtime logs before terminating a stalled process; keep logs and test result artifacts available after failures.
-- Distinguish runner, setup, and test-host failures from test assertion failures. State whether tests actually ran, and preserve the first native test exit status and result artifacts when investigating with a retry. Do not hide a failed attempt behind a later pass or retry blindly.
+- Use normal command output and failure exit status by default, with bounded timeouts. Where useful, upload already-produced logs or test result files on failure; artifact uploads and separate diagnostic steps are not required in every workflow.
+- Make process stacks, system log collection, and diagnostic probes opt-in for a specific investigation. Bound that work within the job timeout and preserve the original failure status; do not mask it with diagnostics or blind retries.
 - Verify reliability fixes against the observed failure. Faster builds or fewer compiled architectures do not establish that unrelated runner or runtime failures are fixed.
