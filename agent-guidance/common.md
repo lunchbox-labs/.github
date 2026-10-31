@@ -2,9 +2,17 @@
 
 - Repository-specific guidance supplies local commands and exceptions to these defaults.
 - Inspect existing code, configuration, and tests before choosing an approach. Use the repository's established tools and patterns.
-- Keep changes focused. Update relevant tests and documentation when behavior changes; keep user-facing READMEs centered on setup and usage.
+- Keep changes focused. Update relevant tests and documentation when behavior changes.
 - Validate the affected behavior with the repository's existing checks. For documentation-only changes, check accuracy and links; report checks actually run and any remaining validation gaps.
 - Use direct, natural wording in public commits, issues, PR titles and descriptions, and documentation. Describe project changes and their rationale; leave out private conversations, coordination logs, and commentary about the writing process.
+
+## Documentation placement
+
+- Before writing, identify the audience, the purpose, and when the reader needs the information. Inspect existing documentation and choose its home accordingly; do not automatically append to the README or create a document for every change.
+- Keep the README a concise project introduction for its intended audience. Include setup and usage that audience needs, such as library installation for consumers. Respect repository-specific preferences for a minimal README, including personal repositories.
+- Keep durable maintainer operations, such as publishing credential setup and release procedures, in one discoverable maintainer or release document. Use an existing document when available and link to it where maintainers will look; document setup, never credential values.
+- Put task plans, detailed test evidence, migration progress, and task-specific decisions in linked issues. Promote only information that future readers need into durable documentation.
+- Maintain one authoritative home for each topic. Link instead of copying, and remove obsolete references when moving or replacing documentation.
 
 ## Commits and pull requests
 
