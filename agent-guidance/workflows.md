@@ -25,3 +25,9 @@ A pull request waits for its slowest job, so read job and step durations from re
 - Do not add steps that only confirm a prerequisite the real step would fail without, such as toolchain version probes or a build the test step repeats. Do not run platform-independent checks (typecheck, lint, formatting) on more than one platform, or lane-independent work in more than one matrix lane.
 - Build only the architecture the job runs. On Apple platforms exclude the unused simulator slice explicitly; `ONLY_ACTIVE_ARCH` is ignored for generic destinations.
 - A job skipped by an `if` condition still satisfies a required status check; a matrix leg that is not generated does not. Keep required-check lists to the jobs that run on every pull request.
+
+## Diagnosing failed checks
+
+- Bound the main operation below the job timeout, reserving separate, bounded time for diagnostics and artifact upload. Capture actionable process state and installer or runtime logs before terminating a stalled process; keep logs and test result artifacts available after failures.
+- Distinguish runner, setup, and test-host failures from test assertion failures. State whether tests actually ran, and preserve the first native test exit status and result artifacts when investigating with a retry. Do not hide a failed attempt behind a later pass or retry blindly.
+- Verify reliability fixes against the observed failure. Faster builds or fewer compiled architectures do not establish that unrelated runner or runtime failures are fixed.
