@@ -9,7 +9,9 @@
 ## Documentation placement
 
 - Before writing, identify the audience, the purpose, and when the reader needs the information. Inspect existing documentation and choose its home accordingly; do not automatically append to the README or create a document for every change.
-- Keep the README a concise project introduction for its intended audience. Include setup and usage that audience needs, such as library installation for consumers. Respect repository-specific preferences for a minimal README, including personal repositories.
+- Keep the README a concise project introduction with essential setup, usage, and links to further documentation. Respect repository-specific preferences for a minimal README, including personal repositories.
+- When the repository wiki is available, prefer it for in-depth human documentation over README sections or repository prose, with separate User and Developer sections as needed. Honor user exclusions, including personal configuration repositories. If the wiki is unavailable, retain existing documentation; verify migrated pages and links before removing originals.
+- Keep machine-consumed instructions such as `AGENTS.md` and `SKILL.md`, licenses, and required build assets in the repository.
 - Keep durable maintainer operations, such as publishing credential setup and release procedures, in one discoverable maintainer or release document. Use an existing document when available and link to it where maintainers will look; document setup, never credential values.
 - Put task plans, detailed test evidence, migration progress, and task-specific decisions in linked issues. Promote only information that future readers need into durable documentation.
 - Maintain one authoritative home for each topic. Link instead of copying, and remove obsolete references when moving or replacing documentation.
