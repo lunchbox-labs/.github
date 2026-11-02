@@ -7,6 +7,7 @@ Use these names when adding a workflow for the corresponding purpose:
 | Routine checks | `check.yml` | `Check` |
 | Separate integration suite, when useful | `integration.yml` | `Integration Tests` |
 | Package publication | `publish.yml` | `Publish` |
+| GitHub Pages deployment | `pages.yml` | `Pages` |
 
 Keep workflow files in `.github/workflows/`. These are naming defaults, not a requirement to create each workflow.
 
