@@ -2,6 +2,8 @@
 
 - Repository-specific guidance supplies local commands and exceptions to these defaults.
 - Inspect existing code, configuration, and tests before choosing an approach. Use the repository's established tools and patterns.
+- Prefer code without comments when clear names and structure can convey the meaning. Use variable, function and class names as verbose as necessary for clarity; avoid acronyms unless their meaning is unmistakably obvious to anyone reading the code.
+- Refactor or improve names before adding explanatory comments. Reserve comments for non-obvious rationale, constraints or workarounds that code and names cannot express. Preserve license notices, required directives and existing comments that still provide useful context; do not remove comments indiscriminately.
 - Keep changes focused. Update relevant tests and documentation when behavior changes.
 - Validate the affected behavior with the repository's existing checks. For documentation-only changes, check accuracy and links; report checks actually run and any remaining validation gaps.
 - Use direct, natural wording in public commits, issues, PR titles and descriptions, and documentation. Describe project changes and their rationale; leave out private conversations, coordination logs, and commentary about the writing process.
