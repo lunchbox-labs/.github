@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lunchbox Labs tokens (mockup)</title>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="base.css">
+<style>
+  body { background: #d9cbd6; padding: 24px; }
+  .sheet { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .panel { background: var(--ll-bg); color: var(--ll-text); border-radius: 22px; padding: 40px; }
+  .panel > h2 { font-size: var(--ll-text-2xl); margin: 0 0 4px; }
+  .panel > p.sub { margin: 0 0 32px; color: var(--ll-text-muted); }
+  h3.sec { font-size: var(--ll-text-lg); margin: 36px 0 14px; }
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .sw { border-radius: 14px; overflow: hidden; background: var(--ll-surface); border: 1px solid var(--ll-hairline); }
+  .sw .chip { height: 56px; display: grid; place-items: center; font-weight: 600; font-size: 15px; }
+  .sw .lbl { padding: 8px 10px; font-size: 12.5px; line-height: 1.35; }
+  .sw .lbl b { display: block; font-weight: 600; font-size: 13px; }
+  .sw .lbl span { color: var(--ll-text-muted); font-variation-settings: var(--ll-voice-code); font-family: var(--ll-font-mono); font-size: 11.5px; }
+  .type-row { display: grid; grid-template-columns: 92px 1fr; align-items: baseline; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--ll-hairline); }
+  .type-row .k { font-size: 12.5px; color: var(--ll-text-muted); }
+  .disp { font-variation-settings: var(--ll-voice-display); font-weight: var(--ll-weight-display); letter-spacing: -0.015em; line-height: 1.1; }
+  .space { display: flex; align-items: flex-end; gap: 12px; }
+  .space .bar { background: var(--ll-pink); border-radius: 3px; }
+  .space .cap { font-size: 11.5px; color: var(--ll-text-muted); text-align: center; margin-top: 6px; }
+  .space .col { display: flex; flex-direction: column; align-items: center; }
+  .radius { display: flex; gap: 24px; align-items: center; }
+  .tray-demo { background: var(--ll-tray); border-radius: 22px; padding: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 260px; }
+  .tray-demo div { background: var(--ll-surface); border-radius: 14px; height: 64px; display: grid; place-items: center; font-size: 12px; color: var(--ll-text-muted); }
+  .rchips { display: flex; gap: 12px; align-items: center; }
+  .rchips span { border: 1.5px solid var(--ll-control-border); height: 40px; display: grid; place-items: center; padding: 0 12px; font-size: 12.5px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 12px; }
+  .field { display: grid; gap: 6px; max-width: 400px; }
+  .field label { font-weight: 600; font-size: 14px; }
+  .field input { font: inherit; height: 44px; border-radius: 8px; border: 1.5px solid var(--ll-control-border); background: var(--ll-surface); color: var(--ll-text); padding: 0 12px; }
+  .field .hint { font-size: 13px; color: var(--ll-text-muted); }
+  .status { display: grid; gap: 8px; }
+  .status div { display: flex; gap: 10px; align-items: center; font-size: 14.5px; background: var(--ll-surface); border-radius: 8px; padding: 10px 12px; border: 1px solid var(--ll-hairline); }
+  .status svg { flex: none; }
+  .motion { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .motion div { background: var(--ll-surface); border: 1px solid var(--ll-hairline); border-radius: 14px; padding: 12px; font-size: 13px; }
+  .motion b { display: block; font-size: 20px; font-variation-settings: var(--ll-voice-display); font-weight: 760; }
+  .motion span { color: var(--ll-text-muted); }
+  .note { font-size: 13px; color: var(--ll-text-muted); margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<div class="sheet">
+<script>
+const panel = (theme) => `
+<section class="panel" data-theme="${theme}">
+  <h2>Lunchbox Labs foundation</h2>
+  <p class="sub">${theme === 'light' ? 'Light' : 'Dark'} appearance. Every text pair here meets 4.5:1, except Disabled, which is exempt.</p>
+
+  <h3 class="sec">Color roles</h3>
+  <div class="swatches">
+    ${[
+      ['Pink','Accent, primary fill','--ll-pink','Aa','--ll-pink-label'],
+      ['Strong pink','Links, borders','--ll-link','Aa', theme==='light'?'--ll-surface':'--ll-pink-label'],
+      ['Page','Background','--ll-bg','Aa','--ll-text'],
+      ['Surface','Compartments','--ll-surface','Aa','--ll-text'],
+      ['Tray','Holds compartments','--ll-tray','Aa','--ll-text-muted'],
+      ['Tint','Selected, hover','--ll-tint','Aa','--ll-link'],
+      ['Text','Body and headings','--ll-text','Aa','--ll-bg'],
+      ['Muted text','Captions, metadata','--ll-text-muted','Aa','--ll-bg'],
+      ['Success','With an icon','--ll-success','Aa','--ll-bg'],
+      ['Warning','With an icon','--ll-warning','Aa','--ll-bg'],
+      ['Error','With an icon','--ll-error','Aa','--ll-bg'],
+      ['Hairline','Decorative only','--ll-hairline','',''],
+    ].map(([n,r,v,t,f]) => `<div class="sw"><div class="chip" style="background:var(${v});color:var(${f||v})">${t}</div><div class="lbl"><b>${n}</b>${r}<br><span data-var="${v}"></span></div></div>`).join('')}
+  </div>
+
+  <h3 class="sec">Type: Recursive, three voices</h3>
+  <div class="type-row"><span class="k">Display 61</span><span class="disp" style="font-size:var(--ll-text-4xl)">Packed with care</span></div>
+  <div class="type-row"><span class="k">H2 31</span><span class="disp" style="font-size:31px">Compasslet</span></div>
+  <div class="type-row"><span class="k">H3 25</span><span class="disp" style="font-size:25px">Config Composer</span></div>
+  <div class="type-row"><span class="k">Lead 20</span><span style="font-size:20px;color:var(--ll-text-muted)">See your direction on iPhone.</span></div>
+  <div class="type-row"><span class="k">Body 16</span><span>Share reusable prompt text across agents, commands and skills.</span></div>
+  <div class="type-row"><span class="k">Small 14</span><span style="font-size:14px;color:var(--ll-text-muted)">Requires Node 22.18 or later.</span></div>
+  <div class="type-row"><span class="k">Code 14</span><code style="font-size:14px">@lunchbox-labs/opencode-prompt-composer</code></div>
+
+  <h3 class="sec">Spacing: 4px base</h3>
+  <div class="space">
+    ${[4,8,12,16,24,32,48,64,96].map((s,i)=>`<div class="col"><div class="bar" style="width:${Math.min(s,40)}px;height:${s}px"></div><span class="cap">${i+1}<br>${s}</span></div>`).join('')}
+  </div>
+
+  <h3 class="sec">Shape: concentric radii</h3>
+  <div class="radius">
+    <div class="tray-demo"><div>14 inside</div><div>8 gap</div></div>
+    <div class="rchips"><span style="border-radius:8px">8</span><span style="border-radius:14px">14</span><span style="border-radius:22px">22</span><span style="border-radius:999px">Pill</span></div>
+  </div>
+  <p class="note">Inner radius equals outer radius minus the gap, so nested corners stay parallel.</p>
+
+  <h3 class="sec">Controls and states</h3>
+  <div class="row">
+    <a class="btn btn-primary">Primary</a>
+    <a class="btn btn-primary is-hover">Hover</a>
+    <a class="btn btn-primary is-focus">Focus</a>
+    <a class="btn btn-primary is-disabled">Disabled</a>
+  </div>
+  <div class="row">
+    <a class="btn btn-secondary">Secondary</a>
+    <a class="btn btn-secondary is-hover">Hover</a>
+    <a class="btn btn-quiet">Quiet</a>
+    <a href="#" style="font-size:16px">An underlined link</a>
+  </div>
+  <div class="field" style="margin-top:16px">
+    <label>Package name</label>
+    <input class="is-focus" value="@lunchbox-labs/opencode-config-composer">
+    <span class="hint">Use the name from npm, including the scope.</span>
+  </div>
+
+  <h3 class="sec">Status never relies on color</h3>
+  <div class="status">
+    <div style="color:var(--ll-success)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Published version 0.4.1.</span></div>
+    <div style="color:var(--ll-warning)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3z"/><path d="M12 9v4M12 17h.01"/></svg><span>Precise location is off, so the heading may drift.</span></div>
+    <div style="color:var(--ll-error)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>That package name isn't on npm. Check the spelling.</span></div>
+  </div>
+
+  <h3 class="sec">Motion: quick and firm, like a latch</h3>
+  <div class="motion">
+    <div><b>100ms</b><span>Hover and press</span></div>
+    <div><b>180ms</b><span>Toggles, small reveals</span></div>
+    <div><b>280ms</b><span>Menus, sheets, one load moment</span></div>
+  </div>
+  <p class="note">Ease out cubic-bezier(0.2, 0, 0, 1). No bounce. Reduce Motion turns movement into a short fade.</p>
+</section>`;
+document.write(panel('light') + panel('dark'));
+document.querySelectorAll('[data-var]').forEach(el => {
+  // Resolve light-dark() for this panel's appearance by reading a real color property.
+  el.style.color = `var(${el.dataset.var})`;
+  const rgb = getComputedStyle(el).color.match(/\d+/g).slice(0, 3);
+  el.textContent = '#' + rgb.map(n => (+n).toString(16).padStart(2, '0')).join('').toUpperCase();
+  el.style.color = '';
+});
+</script>
+</div>
+</body>
+</html>

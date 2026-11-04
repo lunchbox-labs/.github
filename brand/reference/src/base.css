@@ -1,0 +1,70 @@
+/* Reference renders only. Fonts load from Google Fonts: Recursive for the web voices;
+   Inter and Nunito stand in for SF Pro and SF Pro Rounded in the iOS references. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Nunito:wght@400..900&family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap");
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ll-bg);
+  color: var(--ll-text);
+  font-family: var(--ll-font-sans);
+  font-variation-settings: var(--ll-voice-body);
+  font-size: var(--ll-text-md);
+  line-height: var(--ll-leading-body);
+  font-weight: var(--ll-weight-body);
+}
+h1, h2, h3, h4 {
+  font-variation-settings: var(--ll-voice-display);
+  font-weight: var(--ll-weight-display);
+  line-height: var(--ll-leading-tight);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+h3, h4 { line-height: var(--ll-leading-snug); letter-spacing: 0; }
+p { text-wrap: pretty; }
+.wrap { max-width: var(--ll-content-max); margin-inline: auto; padding-inline: var(--ll-gutter); }
+
+a { color: var(--ll-link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible, .is-focus {
+  outline: var(--ll-focus-width) solid var(--ll-focus);
+  outline-offset: var(--ll-focus-offset);
+}
+
+code, .install {
+  font-family: var(--ll-font-mono);
+  font-variation-settings: var(--ll-voice-code);
+  font-size: 0.9em;
+}
+.install {
+  display: block; background: var(--ll-tray); border-radius: var(--ll-radius-sm);
+  padding: var(--ll-space-3) var(--ll-space-4); overflow-wrap: anywhere; font-size: var(--ll-text-sm);
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--ll-space-2);
+  min-height: var(--ll-hit-min); padding: 0 var(--ll-space-5);
+  border-radius: var(--ll-radius-pill);
+  font: inherit; font-weight: var(--ll-weight-strong);
+  text-decoration: none; cursor: pointer;
+  transition: background-color var(--ll-duration-fast) var(--ll-ease-standard),
+              box-shadow var(--ll-duration-fast) var(--ll-ease-standard);
+}
+.btn-primary {
+  background: var(--ll-pink); color: var(--ll-pink-label);
+  border: 1.5px solid var(--ll-control-border);
+}
+[data-theme="dark"] .btn-primary { border-color: var(--ll-pink); }
+.btn-primary:hover, .btn-primary.is-hover { box-shadow: inset 0 0 0 100px rgb(40 20 35 / 0.1); }
+.btn-primary:active, .btn-primary.is-press { box-shadow: inset 0 0 0 100px rgb(40 20 35 / 0.18); }
+.btn-secondary {
+  background: transparent; color: var(--ll-text);
+  border: 1.5px solid var(--ll-control-border);
+}
+.btn-secondary:hover, .btn-secondary.is-hover { background: var(--ll-tint); }
+.btn-quiet { background: transparent; color: var(--ll-link); border: 1.5px solid transparent; padding-inline: var(--ll-space-3); }
+.btn-quiet:hover, .btn-quiet.is-hover { background: var(--ll-tray); }
+.btn[disabled], .btn.is-disabled {
+  background: transparent; color: var(--ll-disabled); border-color: var(--ll-disabled); box-shadow: none; cursor: not-allowed;
+}
