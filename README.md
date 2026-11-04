@@ -4,6 +4,7 @@ Organization-wide configuration and shared resources for Lunchbox Labs.
 
 - [Organization profile](profile/README.md): the public organization overview.
 - [Organization colors](brand/colors.md): primary pink and accessible light and dark theme guidance.
+- [Design foundation](brand/foundation.md): shared type, spacing, shape, depth, motion, icon, voice and accessibility standards, with [web](brand/web.md) and [iOS](brand/ios.md) guides and [reference images](brand/reference/README.md).
 - [Common agent guidance](agent-guidance/common.md): conventions for every repository.
 - [Workflow guidance](agent-guidance/workflows.md): GitHub Actions naming conventions.
 - [npm package guidance](agent-guidance/npm-packages.md): conventions for npm package repositories.

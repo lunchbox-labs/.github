@@ -1,0 +1,127 @@
+/*
+ * Lunchbox Labs design tokens for the web.
+ * Source of truth: colors.md and foundation.md. This file is the reference
+ * mapping for web consumers; copy names as well as values, and recheck
+ * contrast in every consumer when a value changes.
+ */
+
+:root {
+  /* Brand */
+  --ll-pink: #f78aee;
+  --ll-pink-label: #281423;
+
+  /* Type families */
+  --ll-font-sans: "Recursive", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ll-font-mono: "Recursive", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* Recursive axes: CASL 0 = linear, 1 = casual; MONO 0 = sans, 1 = mono */
+  --ll-voice-body: "CASL" 0, "MONO" 0;
+  --ll-voice-display: "CASL" 1, "MONO" 0;
+  --ll-voice-code: "CASL" 0, "MONO" 1;
+
+  /* Type scale (rem at 16px): ratio 1.25, body never below 1rem */
+  --ll-text-xs: 0.8125rem;  /* 13: legal, timestamps (sparingly) */
+  --ll-text-sm: 0.875rem;   /* 14: captions, metadata */
+  --ll-text-md: 1rem;       /* 16: body */
+  --ll-text-lg: 1.25rem;    /* 20: lead paragraph, h4 */
+  --ll-text-xl: 1.5625rem;  /* 25: h3, compartment titles */
+  --ll-text-2xl: 1.9375rem; /* 31: h2 */
+  --ll-text-3xl: 2.4375rem; /* 39: h1 on small screens */
+  --ll-text-4xl: 3.8125rem; /* 61: display / hero h1 */
+
+  --ll-leading-body: 1.6;
+  --ll-leading-snug: 1.3;
+  --ll-leading-tight: 1.08;
+  --ll-measure: 65ch;
+
+  --ll-weight-body: 400;
+  --ll-weight-strong: 600;
+  --ll-weight-display: 780;
+
+  /* Spacing: 4px base */
+  --ll-space-1: 0.25rem; /* 4 */
+  --ll-space-2: 0.5rem;  /* 8 */
+  --ll-space-3: 0.75rem; /* 12 */
+  --ll-space-4: 1rem;    /* 16 */
+  --ll-space-5: 1.5rem;  /* 24 */
+  --ll-space-6: 2rem;    /* 32 */
+  --ll-space-7: 3rem;    /* 48 */
+  --ll-space-8: 4rem;    /* 64 */
+  --ll-space-9: 6rem;    /* 96 */
+
+  --ll-content-max: 72rem;
+  --ll-gutter: clamp(1rem, 4vw, 2rem);
+  --ll-section: clamp(4rem, 9vw, 6rem);
+
+  /* Shape: concentric. inner radius = outer radius - gap */
+  --ll-radius-sm: 8px;    /* inputs, chips, code */
+  --ll-radius-md: 14px;   /* compartments, cards */
+  --ll-radius-lg: 22px;   /* trays (holds compartments with an 8px gap) */
+  --ll-radius-pill: 999px;/* buttons */
+  --ll-tray-gap: 8px;
+
+  /* Motion: quick and firm, like a latch. No bounce. */
+  --ll-duration-fast: 100ms;  /* hover, press */
+  --ll-duration-base: 180ms;  /* small enter/exit, toggles */
+  --ll-duration-slow: 280ms;  /* menus, sheets, one page-load moment */
+  --ll-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ll-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+
+  --ll-focus-width: 3px;
+  --ll-focus-offset: 3px;
+  --ll-hit-min: 44px;
+}
+
+:root {
+  /* Follows the system appearance; data-theme="light" or "dark" overrides it. */
+  color-scheme: light dark;
+  --ll-bg: light-dark(#fff8fe, #18111a);
+  --ll-surface: light-dark(#ffffff, #241a26);
+  --ll-tray: light-dark(#f6e3f2, #2e2231);
+  --ll-tint: light-dark(#fce1f8, #3e2340);
+  --ll-hairline: light-dark(#ecd5e8, #3d2c40);
+  --ll-text: light-dark(#281423, #fff5fd);
+  --ll-text-muted: light-dark(#6e5068, #cdb7c9);
+  --ll-link: light-dark(#992b91, #f78aee);
+  --ll-control-border: light-dark(#992b91, #f78aee);
+  --ll-focus: light-dark(#281423, #fff5fd);
+  --ll-success: light-dark(#1d7044, #6fd79e);
+  --ll-warning: light-dark(#8a5300, #f3be5a);
+  --ll-error: light-dark(#b42318, #ff8f84);
+  --ll-disabled: light-dark(#9c8a98, #7d6a7a);
+  /* Light floats on a tinted shadow; dark raises with a hairline instead. */
+  --ll-shadow-float:
+    0 1px 2px light-dark(rgb(40 20 35 / 0.08), transparent),
+    0 12px 32px -8px light-dark(rgb(40 20 35 / 0.18), transparent),
+    0 0 0 1px light-dark(transparent, #3d2c40);
+}
+
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
+@media (prefers-contrast: more) {
+  :root {
+    --ll-hairline: var(--ll-control-border);
+    --ll-text-muted: var(--ll-text);
+  }
+}
+
+@media (forced-colors: active) {
+  :root {
+    --ll-pink: ButtonFace;
+    --ll-pink-label: ButtonText;
+    --ll-link: LinkText;
+    --ll-control-border: ButtonText;
+    --ll-hairline: CanvasText;
+    --ll-focus: Highlight;
+    --ll-disabled: GrayText;
+    --ll-shadow-float: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Shorter durations only. Components also switch moving transitions to opacity or none. */
+    --ll-duration-base: 0ms;
+    --ll-duration-slow: 120ms;
+  }
+}
