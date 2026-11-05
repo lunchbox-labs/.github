@@ -11,11 +11,12 @@ const src = (page, theme) =>
 const shots = {
   'foundation-tokens': ['tokens.html', null, 1480, 900, 1],
   'ios-components': ['ios-components.html', null, 1480, 900, 1],
+  'ios-glass-accessibility': ['ios-glass-accessibility.html', null, 1350, 900, 1],
 };
 for (const theme of ['light', 'dark']) {
   shots[`web-desktop-${theme}`] = ['web.html', theme, 1280, 900, 1];
   shots[`web-mobile-${theme}`] = ['web.html', theme, 390, 844, 2];
-  shots[`ios-screens-${theme}`] = ['ios.html', theme, 1350, 900, 1];
+  shots[`ios-screens-${theme}`] = ['ios.html', theme, 2240, 900, 1];
 }
 
 const wanted = process.argv.slice(2);

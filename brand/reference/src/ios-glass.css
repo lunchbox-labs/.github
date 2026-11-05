@@ -1,0 +1,114 @@
+/* Shared iPhone frame, system neutrals and a CSS stand-in for Liquid Glass, for the iOS reference images.
+   Real glass refracts and adapts to what's behind it; this only approximates the look.
+   Inter stands in for SF Pro and Nunito for SF Pro Rounded. */
+.ios-light, [data-theme="light"] .ios {
+  --sys-bg: #ffffff; --sys-grouped: #f2f2f7; --sys-cell: #ffffff;
+  --label: #000000; --label2: rgb(60 60 67 / 0.6); --label3: rgb(60 60 67 / 0.3);
+  --sep: rgb(60 60 67 / 0.29); --fill: rgb(120 120 128 / 0.16); --toggle-off: rgb(120 120 128 / 0.16);
+  --tint: #992b91; --on-tint: #ffffff; --north: #d70015; --sysblue: #0088ff;
+  --glass: rgb(250 250 252 / 0.42); --glass-hi: rgb(255 255 255 / 0.85); --glass-edge: rgb(0 0 0 / 0.06);
+  --glass-shadow: 0 10px 30px -8px rgb(0 0 0 / 0.22), 0 1px 3px rgb(0 0 0 / 0.08);
+  --glass-select: rgb(120 120 128 / 0.14);
+  --sheet-glass: rgb(250 250 252 / 0.72);
+  --solid-glass: #f4f4f7; --ic-edge: rgb(0 0 0 / 0.4);
+  --edge-fade: rgb(255 255 255 / 0.92);
+}
+.ios-dark, [data-theme="dark"] .ios {
+  --sys-bg: #000000; --sys-grouped: #000000; --sys-cell: #1c1c1e;
+  --label: #ffffff; --label2: rgb(235 235 245 / 0.6); --label3: rgb(235 235 245 / 0.3);
+  --sep: rgb(84 84 88 / 0.65); --fill: rgb(120 120 128 / 0.36); --toggle-off: rgb(120 120 128 / 0.32);
+  --tint: #f78aee; --on-tint: #281423; --north: #ff4245; --sysblue: #0a84ff;
+  --glass: rgb(44 44 48 / 0.46); --glass-hi: rgb(255 255 255 / 0.2); --glass-edge: rgb(255 255 255 / 0.1);
+  --glass-shadow: 0 10px 30px -8px rgb(0 0 0 / 0.7), 0 1px 3px rgb(0 0 0 / 0.4);
+  --glass-select: rgb(255 255 255 / 0.12);
+  --sheet-glass: rgb(36 36 40 / 0.74);
+  --solid-glass: #2c2c2e; --ic-edge: rgb(255 255 255 / 0.55);
+  --edge-fade: rgb(0 0 0 / 0.9);
+}
+/* Increased Contrast values for the custom colors (the guide's table). */
+.ic.ios-light, [data-theme="light"] .ic { --tint: #7a1f74; --label2: rgb(60 60 67 / 0.82); }
+.ic.ios-dark, [data-theme="dark"] .ic { --tint: #ffb3f7; --on-tint: #000000; --label2: rgb(235 235 245 / 0.82); }
+
+.ios { font-family: "Inter", system-ui, sans-serif; font-variation-settings: normal; color: var(--label); letter-spacing: -0.41px; }
+.rounded { font-family: "Nunito", "Inter", sans-serif; }
+
+.phone {
+  width: 390px; height: 844px; border-radius: 55px; overflow: hidden; position: relative;
+  background: var(--sys-bg); font-size: 17px;
+  box-shadow: 0 0 0 10px #1a1a1c, 0 0 0 11px #3a3a3c, 0 30px 60px -20px rgb(0 0 0 / 0.5);
+}
+.phone.grouped { background: var(--sys-grouped); }
+.island { position: absolute; z-index: 9; top: 11px; left: 50%; transform: translateX(-50%); width: 124px; height: 36px; border-radius: 20px; background: #000; }
+.status { position: absolute; z-index: 8; top: 0; left: 0; right: 0; height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 6px 32px 0 44px; font-weight: 600; }
+.home { position: absolute; z-index: 9; bottom: 8px; left: 50%; transform: translateX(-50%); width: 140px; height: 5px; border-radius: 3px; background: var(--label); }
+
+/* Liquid Glass stand-in: translucent fill, blur, a bright rim and a soft shadow. */
+.glass {
+  background: linear-gradient(180deg, var(--glass-hi), transparent 46%) border-box, var(--glass);
+  -webkit-backdrop-filter: blur(8px) saturate(1.8); backdrop-filter: blur(8px) saturate(1.8);
+  box-shadow: inset 0 0 0 0.5px var(--glass-edge), inset 0 1px 0.5px var(--glass-hi), var(--glass-shadow);
+}
+.glass.flat { background: var(--glass); }
+/* Reduce Transparency: frosted to nearly opaque. */
+.rt .glass, .glass.rt { background: var(--solid-glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+/* Increase Contrast: a defined edge. */
+.ic .glass, .glass.ic { box-shadow: inset 0 0 0 1px var(--ic-edge), var(--glass-shadow); }
+
+/* Floating tab bar, expanded and minimized. */
+.tabbar { position: absolute; z-index: 6; bottom: 25px; left: 50%; transform: translateX(-50%); height: 62px; border-radius: 999px;
+  display: flex; align-items: center; padding: 4px; gap: 2px; }
+.tab { width: 104px; height: 54px; border-radius: 999px; display: grid; place-items: center; align-content: center; gap: 2px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1px; color: var(--label); }
+.tab.on { background: var(--glass-select); color: var(--tint); }
+.tab svg { display: block; }
+.tabmin { position: absolute; z-index: 6; bottom: 25px; left: 24px; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; color: var(--tint); }
+.float { position: absolute; z-index: 6; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; color: var(--label); }
+
+/* Navigation */
+.nav { position: absolute; z-index: 5; top: 54px; left: 0; right: 0; height: 52px; display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; padding: 0 16px; }
+.nav .t { text-align: center; font-weight: 600; }
+.edge-top { position: absolute; z-index: 4; top: 0; left: 0; right: 0; height: 128px; background: linear-gradient(180deg, var(--edge-fade) 52%, transparent);
+  -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); -webkit-mask: linear-gradient(180deg, #000 60%, transparent); mask: linear-gradient(180deg, #000 60%, transparent); }
+.edge-bottom { position: absolute; z-index: 4; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(0deg, var(--edge-fade) 30%, transparent); }
+.largetitle { font-size: 34px; font-weight: 700; letter-spacing: 0.4px; margin: 0; padding: 0 20px; }
+.gbtn { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--label); }
+.done { justify-self: end; background: var(--tint); color: var(--on-tint); font-weight: 600; border-radius: 999px; padding: 0 16px; height: 44px; display: grid; place-items: center;
+  box-shadow: inset 0 1px 0.5px rgb(255 255 255 / 0.35), var(--glass-shadow); }
+
+/* Grouped list */
+.sect { margin: 0 16px; }
+.sect h5 { margin: 22px 20px 7px; font-size: 17px; font-weight: 600; color: var(--label); letter-spacing: -0.41px; }
+.cells { background: var(--sys-cell); border-radius: 26px; overflow: hidden; }
+.cell { min-height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; position: relative; }
+.cell + .cell::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 0.5px; background: var(--sep); }
+.cell .v { color: var(--label2); display: flex; align-items: center; gap: 8px; }
+.cell.note { color: var(--label2); font-size: 15px; padding-block: 12px; line-height: 1.33; letter-spacing: -0.24px; }
+.cell.link { color: var(--tint); }
+.foot { margin: 7px 32px 0; font-size: 13px; color: var(--label2); letter-spacing: -0.08px; }
+.toggle { width: 64px; height: 28px; border-radius: 999px; background: var(--tint); position: relative; }
+.toggle::after { content: ""; position: absolute; top: 2px; right: 2px; width: 38px; height: 24px; border-radius: 999px; background: #fff; box-shadow: 0 2px 4px rgb(0 0 0 / 0.2); }
+
+/* Actions */
+.primary { height: 52px; border-radius: 999px; background: var(--ll-pink); color: var(--ll-pink-label); font-weight: 600; display: grid; place-items: center;
+  box-shadow: inset 0 0 0 1px var(--tint); position: relative; overflow: hidden; }
+.ic .primary { color: #000; }
+.plain { height: 48px; display: grid; place-items: center; color: var(--tint); font-weight: 600; }
+
+/* Sheet: partial height floats inset on glass. */
+.sheet { position: absolute; z-index: 7; left: 8px; right: 8px; bottom: 8px; border-radius: 47px; padding: 14px 16px 22px; display: flex; flex-direction: column; }
+.sheet.glass { background: linear-gradient(180deg, var(--glass-hi), transparent 20%) border-box, var(--sheet-glass); -webkit-backdrop-filter: blur(24px) saturate(1.6); backdrop-filter: blur(24px) saturate(1.6); }
+.rt .sheet.glass { background: var(--solid-glass); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.sheet .grab { width: 36px; height: 5px; border-radius: 3px; background: var(--label3); align-self: center; margin-bottom: 4px; }
+.sheet .top { display: flex; justify-content: space-between; align-items: center; height: 44px; }
+.sheet .ic-tile { width: 64px; height: 64px; border-radius: 18px; background: var(--fill); display: grid; place-items: center; align-self: center; color: var(--tint); margin-top: 4px; }
+.sheet h3 { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 28px; text-align: center; letter-spacing: 0.2px; margin: 16px 0 10px; line-height: 1.15; }
+.sheet p { text-align: center; color: var(--label2); margin: 0 12px; line-height: 1.3; }
+.ic .sheet p { color: var(--label); }
+.sheet .grow { flex: 1; min-height: 20px; }
+.sheet .acts { padding: 0 8px; }
+
+/* Compass content */
+.dialwrap { display: grid; place-items: center; }
+.reading { text-align: center; }
+.reading .big { font-size: 64px; font-weight: 700; letter-spacing: -1px; line-height: 1; }
+.reading .sub { color: var(--label2); font-size: 15px; margin-top: 8px; letter-spacing: -0.24px; }
