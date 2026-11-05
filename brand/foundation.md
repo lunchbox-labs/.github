@@ -102,7 +102,7 @@ Flat by default. Hierarchy comes from the page, tray and surface tones, not shad
 
 - Only floating things (menus, popovers, toasts) get a shadow, tinted with the text color rather than grey: `0 1px 2px` at 8% and `0 12px 32px -8px` at 18% of `#281423`.
 - Dark appearance raises with a lighter surface and a hairline instead of a shadow.
-- No glassmorphism or gradient washes on the web. On iOS, use the system's materials where the system uses them.
+- No glassmorphism or gradient washes on the web. On iOS, navigation and controls float on Liquid Glass above flat content, as the [iOS guide](ios.md) describes; content itself stays flat.
 
 ## Motion
 

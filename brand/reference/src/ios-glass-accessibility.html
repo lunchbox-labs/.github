@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lunchbox Labs iOS glass fallbacks (reference)</title>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="ios-glass.css">
+<script src="ios-parts.js"></script>
+<style>
+  body { background: #d9cbd6; padding: 32px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 390px); gap: 28px 32px; justify-content: center; }
+  .head { text-align: center; font-family: var(--ll-font-sans); font-variation-settings: var(--ll-voice-display); font-weight: 760; font-size: 20px; color: #281423; margin: 0; }
+  .crop { width: 390px; height: 380px; border-radius: 40px; overflow: hidden; position: relative; background: var(--sys-bg); box-shadow: 0 0 0 8px #1a1a1c, 0 20px 40px -18px rgb(0 0 0 / 0.5); }
+  .crop .content { position: absolute; left: 0; right: 0; top: -150px; }
+  .crop .nav { top: 8px; }
+  .crop .edge-top { height: 76px; }
+  .crop .tabbar { bottom: 22px; }
+  .crop .float { bottom: 92px; right: 22px; }
+  .lbl { text-align: center; color: #281423; font-size: 14px; margin: 10px 0 0; }
+  .fontnote { text-align: center; margin: 28px 0 0; color: #281423; font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="grid" id="grid"></div>
+<p class="fontnote">The tab bar and a floating control with content scrolled beneath them, so the glass has something to show through. Reduce Transparency frosts the glass; Increase Contrast adds an edge and switches custom colors to their Increased Contrast values. System glass does this by itself; glass is approximated in CSS here.</p>
+<script>
+const modes = [['', 'Default'], ['rt', 'Reduce Transparency'], ['ic', 'Increase Contrast']];
+let h = modes.map(([, t]) => `<p class="head">${t}</p>`).join('');
+for (const theme of ['light', 'dark']) {
+  for (const [cls] of modes) {
+    h += `<div><div class="crop ios ios-${theme} ${cls}">
+      <div class="reading" style="position:absolute;top:24px;left:0;right:0"><div class="big rounded" style="font-size:44px">12° N</div></div>
+      <div class="dialwrap" style="position:absolute;top:96px;left:0;right:0">${dial()}</div>
+      ${tabbar(0)}
+      <div class="float glass">${icon.car()}</div>
+    </div><p class="lbl">${theme === 'light' ? 'Light' : 'Dark'}</p></div>`;
+  }
+}
+document.getElementById('grid').innerHTML = h;
+</script>
+</body>
+</html>

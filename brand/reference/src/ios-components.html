@@ -5,31 +5,18 @@
 <title>Lunchbox Labs iOS components (reference)</title>
 <link rel="stylesheet" href="../../tokens.css">
 <link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="ios-glass.css">
+<script src="ios-parts.js"></script>
 <style>
-  /* iOS components in light and dark. Inter stands in for SF Pro, Nunito for SF Pro Rounded. */
-  .ios-light {
-    --sys-bg: #ffffff; --sys-grouped: #f2f2f7; --sys-cell: #ffffff;
-    --label: #000000; --label2: rgb(60 60 67 / 0.6); --label3: rgb(60 60 67 / 0.3);
-    --sep: rgb(60 60 67 / 0.29); --fill: rgb(120 120 128 / 0.16);
-    --tint: #992b91; --on-tint: #ffffff; --sysblue: #0088ff;
-    --glass: rgb(255 255 255 / 0.78); --glass-edge: rgb(0 0 0 / 0.08);
-  }
-  .ios-dark {
-    --sys-bg: #000000; --sys-grouped: #000000; --sys-cell: #1c1c1e;
-    --label: #ffffff; --label2: rgb(235 235 245 / 0.6); --label3: rgb(235 235 245 / 0.3);
-    --sep: rgb(84 84 88 / 0.65); --fill: rgb(120 120 128 / 0.36);
-    --tint: #f78aee; --on-tint: #281423; --sysblue: #0a84ff;
-    --glass: rgb(60 60 67 / 0.6); --glass-edge: rgb(255 255 255 / 0.14);
-  }
+  /* iOS components in light and dark. Inter stands in for SF Pro, Nunito for SF Pro Rounded; glass is approximated in CSS. */
   body { background: #d9cbd6; padding: 24px; }
-  .sheet { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .panel { background: var(--sys-grouped); color: var(--label); border-radius: 22px; padding: 36px; font-family: "Inter", sans-serif; font-variation-settings: normal; letter-spacing: -0.2px; }
+  .sheetgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .panel { background: var(--sys-grouped); color: var(--label); border-radius: 22px; padding: 36px; }
   .panel h2 { font-family: var(--ll-font-sans); font-variation-settings: var(--ll-voice-display); font-weight: var(--ll-weight-display); font-size: 31px; margin: 0 0 4px; letter-spacing: -0.4px; }
   .panel .sub { margin: 0 0 8px; color: var(--label2); font-size: 15px; }
   .sec { font-family: var(--ll-font-sans); font-variation-settings: var(--ll-voice-display); font-weight: 760; font-size: 20px; margin: 30px 0 12px; letter-spacing: 0; }
   .card { background: var(--sys-cell); border-radius: 20px; padding: 18px; }
-  .rounded { font-family: "Nunito", sans-serif; }
-  .styles .r { display: grid; grid-template-columns: 110px 1fr; align-items: baseline; padding: 5px 0; border-bottom: 0.5px solid var(--sep); }
+  .styles .r { display: grid; grid-template-columns: 120px 1fr; align-items: baseline; padding: 5px 0; border-bottom: 0.5px solid var(--sep); }
   .styles .r:last-child { border-bottom: 0; }
   .styles .k { color: var(--label2); font-size: 13px; }
   .btns { display: grid; gap: 10px; }
@@ -37,45 +24,49 @@
     display: grid; place-items: center; box-shadow: inset 0 0 0 1px var(--tint); position: relative; overflow: hidden; }
   .capsule.pressed::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / 0.12); }
   .capsule.disabled { opacity: 0.4; }
-  .plain { height: 44px; display: grid; place-items: center; color: var(--tint); font-weight: 600; font-size: 17px; }
   .lbl { font-size: 12px; color: var(--label2); text-align: center; margin-top: -4px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
-  .bar { display: flex; align-items: center; justify-content: space-between; background: var(--sys-cell); border-radius: 20px; padding: 10px 12px 10px 18px; }
-  .bar .t { font-weight: 600; font-size: 17px; }
-  .done { background: var(--tint); color: var(--on-tint); font-weight: 600; border-radius: 999px; padding: 0 16px; height: 44px; display: grid; place-items: center; font-size: 17px; }
-  .cells { background: var(--sys-cell); border-radius: 20px; overflow: hidden; }
-  .cell { min-height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; position: relative; font-size: 17px; }
-  .cell + .cell::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 0.5px; background: var(--sep); }
+  /* A strip of content for glass to float over. */
+  .stage { position: relative; border-radius: 20px; overflow: hidden; background: var(--sys-cell); height: 132px; }
+  .stage .bg { position: absolute; inset: 0; padding: 10px 16px; font-size: 15px; line-height: 1.55; color: var(--label2); }
+  .stage .dialbg { padding: 0; display: grid; justify-items: center; align-items: start; margin-top: -60px; }
+  .stage .bg b { color: var(--tint); font-weight: 500; }
+  .stage .fg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .stage .fg.spread { justify-content: space-between; padding: 0 14px; }
+  .stage .t { font-weight: 600; font-size: 17px; }
+  .stage .tabbar, .stage .tabmin, .stage .float { position: static; transform: none; }
+  .tgroup { height: 44px; border-radius: 999px; display: flex; align-items: center; padding: 0 4px; }
+  .tgroup .gbtn { box-shadow: none; background: none; }
+  .cells { border-radius: 20px; }
   .cell .ok { color: var(--tint); }
   .cell .no { color: var(--sysblue); }
   .cell small { color: var(--label2); font-size: 13px; }
-  .glassrow { display: flex; gap: 18px; align-items: center; }
-  .glass { width: 64px; height: 64px; border-radius: 50%; background: var(--glass); box-shadow: inset 0 0 0 0.5px var(--glass-edge), 0 6px 20px rgb(0 0 0 / 0.14); display: grid; place-items: center; color: var(--label); }
-  .glassrow p { margin: 0; color: var(--label2); font-size: 14px; line-height: 1.35; }
   .note { font-size: 13px; color: var(--label2); margin: 10px 0 0; line-height: 1.4; }
   .fontnote { grid-column: 1 / -1; text-align: center; margin: 4px 0 0; color: #281423; font-size: 15px; }
 </style>
 </head>
 <body>
-<div class="sheet">
+<div class="sheetgrid" id="grid"></div>
 <script>
+const stage = (fg, cls = '') => `<div class="stage"><div class="bg dialbg">${dial(300)}</div><div class="fg ${cls}">${fg}</div></div>`;
 const panel = (mode) => `
-<section class="panel ios-${mode}" data-theme="${mode}">
+<section class="panel ios ios-${mode}">
   <h2>iOS components</h2>
-  <p class="sub">${mode === 'light' ? 'Light' : 'Dark'} appearance, system neutrals, brand accent.</p>
+  <p class="sub">${mode === 'light' ? 'Light' : 'Dark'} appearance. Content stays plain; navigation and controls float on glass.</p>
 
-  <h3 class="sec">Text styles</h3>
-  <div class="card styles">
-    <div class="r"><span class="k">Rounded display</span><span class="rounded" style="font-size:34px;font-weight:800;letter-spacing:0">12° N</span></div>
-    <div class="r"><span class="k">Large Title</span><span style="font-size:34px;font-weight:700;letter-spacing:0.4px">Compasslet</span></div>
-    <div class="r"><span class="k">Title 2</span><span style="font-size:22px;font-weight:700">Appearance</span></div>
-    <div class="r"><span class="k">Headline</span><span style="font-size:17px;font-weight:600">Location Enabled</span></div>
-    <div class="r"><span class="k">Body</span><span style="font-size:17px">Keep the dial in view while you drive.</span></div>
-    <div class="r"><span class="k">Footnote</span><span style="font-size:13px;color:var(--label2)">Compasslet is open source under the MIT License.</span></div>
+  <h3 class="sec">Tab bar</h3>
+  <div class="grid2">
+    <div>${stage(tabbar(0))}<p class="lbl" style="margin-top:6px">Expanded: two to five tabs, selected tab in the accent</p></div>
+    <div>${stage(tabmin(0) + '<span style="flex:1"></span>', 'spread')}<p class="lbl" style="margin-top:6px">Minimized on scroll to the current tab</p></div>
   </div>
-  <p class="note">Every style follows Dynamic Type. Rounded bold is only for brand moments.</p>
 
-  <h3 class="sec">Actions</h3>
+  <h3 class="sec">Toolbars</h3>
+  <div class="grid2">
+    <div>${stage(`<span class="gbtn glass">${icon.xmark()}</span><span class="t">Settings</span><span class="done">Done</span>`, 'spread')}<p class="lbl" style="margin-top:6px">Close on glass, confirm in prominent glass: the screen's one pink fill</p></div>
+    <div>${stage(`<span class="tgroup glass"><span class="gbtn">${icon.location(22)}</span><span class="gbtn">${icon.car(22)}</span></span><span class="gbtn glass">${icon.gear(22)}</span>`)}<p class="lbl" style="margin-top:6px">Related items share one glass group; a fixed spacer splits groups</p></div>
+  </div>
+
+  <h3 class="sec">Actions in content</h3>
   <div class="grid2">
     <div class="btns">
       <div class="capsule">Allow Location</div><div class="lbl">Primary, one per screen</div>
@@ -84,7 +75,7 @@ const panel = (mode) => `
     </div>
     <div class="btns">
       <div class="plain">Not Now</div><div class="lbl">Secondary: plain, accent</div>
-      <div class="bar"><span class="t">Settings</span><span class="done">Done</span></div><div class="lbl">Toolbar confirm: prominent glass in the accent</div>
+      ${stage(`<span class="float glass">${icon.car()}</span>`)}<div class="lbl">Floating control: an icon-only circle on regular glass, 44 to 80pt</div>
     </div>
   </div>
 
@@ -95,15 +86,19 @@ const panel = (mode) => `
   </div>
   <p class="note">Tint links with the accent explicitly. System blue falls below 4.5:1 on light rows.</p>
 
-  <h3 class="sec">Floating control</h3>
-  <div class="glassrow">
-    <div class="glass"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.4 10.5 16 7H8L5.6 10.5 3.5 11.1C2.7 11.3 2 12.1 2 13v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/></svg></div>
-    <p>Icon only, 44 to 80pt, in the system glass. It always has a VoiceOver label and shows its name in the large content viewer.</p>
+  <h3 class="sec">Text styles</h3>
+  <div class="card styles">
+    <div class="r"><span class="k">Rounded display</span><span class="rounded" style="font-size:34px;font-weight:800;letter-spacing:0">12° N</span></div>
+    <div class="r"><span class="k">Large Title</span><span style="font-size:34px;font-weight:700;letter-spacing:0.4px">Settings</span></div>
+    <div class="r"><span class="k">Headline</span><span style="font-size:17px;font-weight:600">Location Enabled</span></div>
+    <div class="r"><span class="k">Body</span><span style="font-size:17px">Keep the dial in view while you drive.</span></div>
+    <div class="r"><span class="k">Tab label</span><span style="font-size:10px;font-weight:600">Compass</span></div>
+    <div class="r"><span class="k">Footnote</span><span style="font-size:13px;color:var(--label2)">Compasslet is open source under the MIT License.</span></div>
   </div>
+  <p class="note">Every style follows Dynamic Type. Rounded bold is only for brand moments.</p>
 </section>`;
-document.write(panel('light') + panel('dark'));
+document.getElementById('grid').innerHTML = panel('light') + panel('dark') +
+  '<p class="fontnote">Type shown with Inter in place of SF Pro and Nunito in place of SF Pro Rounded; glass is approximated in CSS. Apps use the system fonts and materials.</p>';
 </script>
-<p class="fontnote">Type shown with Inter in place of SF Pro and Nunito in place of SF Pro Rounded. Apps use the system fonts.</p>
-</div>
 </body>
 </html>
