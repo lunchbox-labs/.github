@@ -6,12 +6,13 @@ Use these names when adding a workflow for the corresponding purpose:
 | --- | --- | --- |
 | Routine checks | `check.yml` | `Check` |
 | Separate integration suite, when useful | `integration.yml` | `Integration Tests` |
-| Package publication | `publish.yml` | `Publish` |
+| Release, in a repository with one product | `release.yml` | `Release` |
+| Release of one product, in a repository with several | `release-<product>.yml` | `Release <Product>` |
 | GitHub Pages deployment | `pages.yml` | `Pages` |
 
-Keep workflow files in `.github/workflows/`. These are naming defaults, not a requirement to create each workflow.
+Keep workflow files in `.github/workflows/`. These are naming defaults, not a requirement to create each workflow. Release workflows also follow the [release conventions](releases.md) for triggers, permissions, environments and tags.
 
-Use short, descriptive job IDs such as `check`, `native`, `verify`, and `publish`. Where an explicit job display name helps, describe its purpose; for npm publication, the established names are `Verify` and `Publish npm`. Include distinguishing matrix values in custom matrix job names.
+Use short, descriptive job IDs such as `check`, `native`, `verify`, `publish`, and `release`. Where an explicit job display name helps, describe its purpose; for npm publication inside a release workflow, the established job names are `Verify` and `Publish npm`. Include distinguishing matrix values in custom matrix job names.
 
 Preserve existing filenames, workflow display names, job IDs, and check names when making unrelated changes. They can be referenced by checks, integrations, and publishing configuration. Repository-specific triggers, matrices and validation choices stay in the repository; the defaults below apply unless the repository documents why not.
 
