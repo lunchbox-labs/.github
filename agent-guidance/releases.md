@@ -1,6 +1,6 @@
 # Release workflow conventions
 
-Releases run entirely in GitHub Actions. A maintainer starts the workflow by hand; the workflow builds the assets, then creates the tag and the GitHub release with its assets, and publishes it. Nobody tags or publishes a release manually.
+Releases run entirely in GitHub Actions. A maintainer starts the workflow by hand. By default a run only builds the assets; with the `publish` box checked, the workflow builds the assets, then creates the tag and the GitHub release with its assets, and publishes it. Nobody tags or publishes a release manually.
 
 ## Names
 
@@ -16,19 +16,22 @@ These names replace the earlier `publish.yml` workflows (named `Publish` or `Pub
 ## Triggers and inputs
 
 - Trigger release workflows only with `workflow_dispatch`. Do not start a release from a push, tag, schedule or another workflow.
-- Keep inputs to the ones the repository has agreed on. Where the version is already in a manifest such as `package.json`, read it from there instead of asking for it.
+- Give every release workflow a boolean `publish` input with `default: false`. Do not add a `dry_run` input.
+- A run with `publish` unchecked builds and generates the assets, uploads them as run artifacts and writes a job summary of what would be released, such as the version, tag and assets. It creates no tag and no GitHub release and publishes no package.
+- Run the jobs that publish packages and the final release job only when `inputs.publish` is true.
+- Keep other inputs to the ones the repository has agreed on. Where the version is already in a manifest such as `package.json`, read it from there instead of asking for it.
 
 ## Permissions
 
 - Set `permissions: {}` at the workflow level and grant each job only what it needs.
 - Only the final release job gets `contents: write`. Building, testing and packaging jobs get `contents: read`.
 - A job that publishes to npm with trusted publishing gets `id-token: write` and `contents: read`.
-- Run the final release job, and every job that uses release secrets or publishes packages, in the release environment, so the environment's secrets and protection rules apply to them.
+- Run the final release job, and every job that uses release secrets or publishes packages, in the release environment, so the environment's secrets and protection rules apply to them. A build job that needs release secrets, such as signing, runs in the environment whether or not `publish` is checked, so an unchecked run produces the same assets a release would.
 
 ## Tags and the GitHub release
 
 - The final release job creates the `v`-prefixed tag on the commit the workflow ran on and creates the GitHub release with `GITHUB_TOKEN`, for example with `gh release create "$TAG" --target "$GITHUB_SHA"`.
-- Check that the tag does not exist yet in an early read-only job, before anything is built or published, and fail the run if it does. Tags are immutable, so a repeated release needs a new version.
+- Check that the tag does not exist yet in an early read-only job, before anything is built or published, and fail a checked run if it does. On an unchecked run, report an existing tag in the job summary instead. Tags are immutable, so a repeated release needs a new version.
 - Publish packages before the final release job. If a later job fails, use Re-run failed jobs on the same run rather than starting a new release.
 - Attach every asset before the release is published: create it with its assets in one step, or create a draft, upload the assets and then publish it.
 - A tag or release created with `GITHUB_TOKEN` does not trigger workflows that listen for push, create or release events, so nothing may depend on those events to start further work; do follow-up work in the release workflow itself.

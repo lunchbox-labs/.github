@@ -7,7 +7,7 @@ Organization-wide configuration and shared resources for Lunchbox Labs.
 - [Design foundation](brand/foundation.md): shared type, spacing, shape, depth, motion, icon, voice and accessibility standards, with [web](brand/web.md) and [iOS](brand/ios.md) guides and [reference images](brand/reference/README.md).
 - [Common agent guidance](agent-guidance/common.md): conventions for every repository.
 - [Workflow guidance](agent-guidance/workflows.md): GitHub Actions naming conventions.
-- [Release guidance](agent-guidance/releases.md): manually started release workflows that build, tag and publish each release.
+- [Release guidance](agent-guidance/releases.md): manually started release workflows that build each release and publish it only when the `publish` box is checked.
 - [npm package guidance](agent-guidance/npm-packages.md): conventions for npm package repositories.
 - [iOS app guidance](agent-guidance/ios-apps.md): conventions for native iOS app repositories.
 - [Agent tooling guidance](agent-guidance/agent-tooling.md): shared layout for Codex, Claude Code and OpenCode procedures and reviewer roles.
