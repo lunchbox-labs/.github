@@ -10,7 +10,7 @@ Use these names when adding a workflow for the corresponding purpose:
 | Release of one product, in a repository with several | `release-<product>.yml` | `Release <Product>` |
 | GitHub Pages deployment | `pages.yml` | `Pages` |
 
-Keep workflow files in `.github/workflows/`. These are naming defaults, not a requirement to create each workflow. Release workflows also follow the [release conventions](releases.md) for triggers, permissions, environments and tags.
+Keep workflow files in `.github/workflows/`. These are naming defaults, not a requirement to create each workflow. Release workflows also follow the [release conventions](releases.md) for triggers, inputs, permissions, environments and tags.
 
 Use short, descriptive job IDs such as `check`, `native`, `verify`, `publish`, and `release`. Where an explicit job display name helps, describe its purpose; for npm publication inside a release workflow, the established job names are `Verify` and `Publish npm`. Include distinguishing matrix values in custom matrix job names.
 
